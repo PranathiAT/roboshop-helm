@@ -5,26 +5,25 @@ metadata:
   labels:
     {{- include "roboshop.labels" . | nindent 4 }}
 spec:
-   {{- if not .Values.autoscaling.enabled }}
-replicas: {{ .Values.replicaCount }}
-   {{- end }}
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "roboshop.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
-    annotations:
+      annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "roboshop.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
-    imagePullSecrets:
+      imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
       serviceAccountName: {{ .Values.appName }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -33,7 +32,6 @@ replicas: {{ .Values.replicaCount }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: 141912740338.dkr.ecr.us-east-1.amazonaws.com/{{ .Values.appName }}
-
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
