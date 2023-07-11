@@ -7,6 +7,7 @@ pipeline {
     string(name: 'app_version', defaultValue: '', description: 'App Version')
   }
 
+
   stages {
 
     stage('Clone App Repo') {
