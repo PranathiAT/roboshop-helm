@@ -4,6 +4,7 @@ pipeline {
 
   parameters {
     string(name: 'component', defaultValue: '', description: 'App Component Name')
+    string(name: 'app_version', defaultValue: '', description: 'App Version')
 
     }
 
@@ -27,7 +28,7 @@ pipeline {
       steps {
         dir('HELM') {
           sh 'aws eks update-kubeconfig --name prod-eks-cluster'
-          sh 'helm upgrade -i ${component} . -f ../APP/values.yaml'
+          sh 'helm upgrade -i ${component} . -f ../APP/values.yaml --set app_version=${app_version}'
         }
 
       }
