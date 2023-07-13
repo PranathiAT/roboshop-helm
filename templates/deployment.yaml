@@ -21,7 +21,7 @@ spec:
         {{- include "roboshop.selectorLabels" . | nindent 8 }}
     spec:
       volumes:
-        - name: cache-volume
+        - name: params-volume
           emptyDir:
             sizeLimit: 5Mi
       {{- with .Values.imagePullSecrets }}
