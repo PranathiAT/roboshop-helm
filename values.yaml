@@ -20,6 +20,8 @@ serviceAccount:
   # Annotations to add to the service account
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::141912740338:role/eks-ssm-ps-prod-role
+    "helm.sh/hook": "pre-install"
+
 
 
   # The name of the service account to use.
